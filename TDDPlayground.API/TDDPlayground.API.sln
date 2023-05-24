@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDPlayground.API", "TDDPlayground.API\TDDPlayground.API.csproj", "{435B48D9-BE5A-42AD-B366-7BD8D7376327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDPlayground.API.Tests", "TDDPlayground.API.Tests\TDDPlayground.API.Tests.csproj", "{625C0556-E239-4664-B87E-924D94DC112B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{435B48D9-BE5A-42AD-B366-7BD8D7376327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435B48D9-BE5A-42AD-B366-7BD8D7376327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435B48D9-BE5A-42AD-B366-7BD8D7376327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435B48D9-BE5A-42AD-B366-7BD8D7376327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625C0556-E239-4664-B87E-924D94DC112B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625C0556-E239-4664-B87E-924D94DC112B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625C0556-E239-4664-B87E-924D94DC112B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625C0556-E239-4664-B87E-924D94DC112B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {230FED9E-77D5-4B00-8C1D-BCB8241A05FF}
+	EndGlobalSection
+EndGlobal
