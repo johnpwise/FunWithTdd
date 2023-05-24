@@ -40,19 +40,19 @@ describe('User Component', () => {
     });
 
     it('should call the Random User Generator API when the "loadUserDetails" method is called', async () => {
-        // Arrange:
+        // Arrange
         let axiosGetStub = sinon.stub(axios, 'get');
 
         // Setup your stub to return a resolved promise
-        axiosGetStub.returns(Promise.resolve({ data: { /* ... your mock data ... */ } }));
+        axiosGetStub.returns(Promise.resolve({ data: { /* ... mock data ... */ } }));
 
         const wrapper = shallowMount(User);
 
-        // Act: Call your method that uses axios
+        // Act
         await wrapper.vm.loadUserDetails();
 
         // Assert: Check that the stub was called with the correct URL
-        expect(axiosGetStub).to.have.been.calledWith('https://www.example.com/api/endpoint');
+        expect(axiosGetStub).to.have.been.calledWith('https://randomuser.me/api/');
 
         // Clean up: restore the original function
         axiosGetStub.restore();

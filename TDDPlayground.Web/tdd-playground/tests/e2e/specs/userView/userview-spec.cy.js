@@ -22,4 +22,23 @@ describe('User View', () => {
         cy.get(selector).should('exist');
         cy.get(selector).should('contain', expected);
     });
+
+    describe('Load User Details Button', () => {
+        it('should display a user profile if data is successfully returned from the API', () => {
+            // Arrange
+            const selector = 'button';
+
+            // intercept the API call
+            cy.intercept('GET', 'https://randomuser.me/api/', {fixture: 'user.json'});
+
+            // Act
+            cy.get(selector).click();
+
+            // Assert
+            cy.get('.card').should('exist');
+            cy.get('.card-header').should('contain', 'User Profile');
+            // assert card body data from API
+            cy.get('.card-body').should('contain', 'Mr John Doe');
+        });
+    });
 });
