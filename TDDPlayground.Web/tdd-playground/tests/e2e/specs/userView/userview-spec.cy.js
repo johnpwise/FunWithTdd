@@ -79,7 +79,6 @@ describe('User View', () => {
             // Assert
             cy.get(spinnerSelector).should('exist')
 
-            cy.intercept('GET', 'https://randomuser.me/api/', { /* mocked response */ }).as('getUserData')
             cy.wait('@getUserData')
 
             // Call complete, so spinner should be gone
