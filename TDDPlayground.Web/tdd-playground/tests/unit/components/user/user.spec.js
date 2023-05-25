@@ -44,7 +44,27 @@ describe('User Component', () => {
         let axiosGetStub = sinon.stub(axios, 'get');
 
         // Setup your stub to return a resolved promise
-        axiosGetStub.returns(Promise.resolve({ data: { /* ... mock data ... */ } }));
+        axiosGetStub.returns(Promise.resolve({
+            data: {
+                "results": [
+                    {
+                        "name": {
+                            "title": "Mr",
+                            "first": "John",
+                            "last": "Doe"
+                        },
+                        "picture": {
+                            "medium": "",
+                            "large": ""
+                        },
+                        "dob": {
+                            "date": "01/01/1970",
+                            "age": 53
+                        }
+                    }
+                ]
+            }
+        }));
 
         const wrapper = shallowMount(User);
 

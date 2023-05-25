@@ -17,11 +17,33 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
-                                <span>{{ formLables.fullName }}</span>
-                            </div>
-                            <div class="col-md-10">
-                                <span>{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</span>
+                            <div class="col-md-12">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span>{{ formLabels.fullName }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</span>
+                                        </td>
+                                        <td rowspan="2">
+                                            <img :src="user.picture.large" :alt="user.name.first" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>{{ formLabels.dob }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ user.dob.date }}</span>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -44,10 +66,19 @@ export default defineComponent({
                     title: '',
                     first: '',
                     last: ''
+                },
+                picture: {
+                    medium: '',
+                    large: '',
+                },
+                dob: {
+                    date: '',
+                    age: 0
                 }
             },
-            formLables: {
-                fullName: 'Full Name:'
+            formLabels: {
+                fullName: 'Full Name:',
+                dob: 'Date of Birth:'
             }
         }
     },

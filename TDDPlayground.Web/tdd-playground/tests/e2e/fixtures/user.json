@@ -5,6 +5,14 @@
         "title": "Mr",
         "first": "John",
         "last": "Doe"
+      },
+      "picture": {
+          "medium": "",
+          "large": ""
+      },
+      "dob": {
+          "date": "",
+          "age": 0
       }
     }
   ]
