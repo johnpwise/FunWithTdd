@@ -19,30 +19,29 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <table>
-                                    <tr>
-                                        <td>
-                                            <span>{{ formLabels.fullName }}</span>
-                                        </td>
-                                        <td>
-                                            <span>{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</span>
-                                        </td>
-                                        <td rowspan="2">
-                                            <img :src="user.picture.large" :alt="user.name.first" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>{{ formLabels.dob }}</span>
-                                        </td>
-                                        <td>
-                                            <span>{{ user.dob.date }}</span>
-                                        </td>
-                                        <td>&nbsp;</td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span>{{ formLabels.fullName }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ user.name.title }} {{ user.name.first }} {{ user.name.last
+                                                }}</span>
+                                            </td>
+                                            <td rowspan="2">
+                                                <img :src="user.picture.large" :alt="user.name.first" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>{{ formLabels.dob }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ user.dob.date }}</span>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -87,13 +86,19 @@ export default defineComponent({
             // use axios to call an aPI with GET
             axios.get('https://randomuser.me/api/')
                 .then((response) => {
-                    // console.log(response);
                     this.user = response.data.results[0];
+                    this.user.dob.date = this.formatDateOfBirth(this.user.dob.date);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        formatDateOfBirth(dateOfBirth: string): string {
+            const date = new Date(dateOfBirth);
+            const formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
+            return formattedDate;
         }
+
     },
     props: {
         pageTitle: String
