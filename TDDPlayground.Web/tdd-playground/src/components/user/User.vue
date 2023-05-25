@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <table>
+                                <table class="table">
                                     <tbody>
                                         <tr>
                                             <td>
@@ -28,7 +28,7 @@
                                                 <span>{{ user.name.title }} {{ user.name.first }} {{ user.name.last
                                                 }}</span>
                                             </td>
-                                            <td rowspan="2">
+                                            <td rowspan="3">
                                                 <img :src="user.picture.large" :alt="user.name.first" />
                                             </td>
                                         </tr>
@@ -40,6 +40,40 @@
                                                 <span>{{ formatDateOfBirth(user.dob.date) }}</span>
                                             </td>
                                             <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>{{ formLabels.email }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ user.email }}</span>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">{{ formLabels.loginDetails }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>{{ formLabels.username }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ formLabels.password }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ formLabels.uuid }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>{{ user.login.username }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ user.login.password }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ user.login.uuid }}</span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -73,27 +107,36 @@ export default defineComponent({
                 dob: {
                     date: '',
                     age: 0
-                }
+                },
+                login: {
+                    uuid: '',
+                    username: '',
+                    password: ''
+                },
+                email: '',
             },
             formLabels: {
                 fullName: 'Full Name:',
-                dob: 'Date of Birth:'
+                dob: 'Date of Birth:',
+                loginDetails: 'Login Details',
+                username: 'Username:',
+                password: 'Password:',
+                uuid: 'UUID:',
+                email: 'Email:'
             }
         }
     },
     methods: {
         loadUserDetails() {
-            // use axios to call an API with GET
             axios.get('https://randomuser.me/api/')
                 .then((response) => {
                     this.user = response.data.results[0];
                 })
                 .catch((error) => {
-                    console.log(error);
+
                 });
         },
         formatDateOfBirth(dateOfBirth: string): string {
-            // if the dateOfBirth string is '' then return '00/00/0000'
             if (dateOfBirth === '') {
                 return '';
             }

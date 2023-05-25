@@ -7,13 +7,19 @@
         "last": "Doe"
       },
       "picture": {
-          "medium": "",
-          "large": ""
+        "medium": "https://randomuser.me/api/portraits/men/75.jpg",
+        "large": "https://randomuser.me/api/portraits/men/75.jpg"
       },
       "dob": {
-          "date": "1970-12-28T17:49:01.393Z",
-          "age": 53
-      }
+        "date": "1970-12-28T17:49:01.393Z",
+        "age": 53
+      },
+      "login": {
+        "uuid": "7a0eed16-9430-4d68-901f-c0d4c1c3bf00",
+        "username": "yellowpeacock117",
+        "password": "addison"
+      },
+      "email": "johndoe@test.com"
     }
   ]
 }
