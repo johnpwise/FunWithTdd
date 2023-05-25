@@ -8,7 +8,10 @@
 
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-primary" @click="loadUserDetails">Load User Details</button>
+                <button class="btn btn-primary" @click="loadUserDetails" :disabled="isDisabled">
+                    <font-awesome-icon icon="spinner" spin v-if="isDisabled" />
+                    <span v-else>Load User Details</span>
+                </button>
             </div>
             <div class="col-md-9">
                 <div class="card">
@@ -87,13 +90,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import axios from 'axios';
 
 export default defineComponent({
     name: 'User',
     data() {
         return {
+            isDisabled: false,
             user: {
                 name: {
                     title: '',
@@ -128,12 +132,17 @@ export default defineComponent({
     },
     methods: {
         loadUserDetails() {
+            this.isDisabled = true;
+
             axios.get('https://randomuser.me/api/')
                 .then((response) => {
                     this.user = response.data.results[0];
                 })
                 .catch((error) => {
-
+                    // handle error
+                })
+                .finally(() => {
+                    this.isDisabled = false;
                 });
         },
         formatDateOfBirth(dateOfBirth: string): string {

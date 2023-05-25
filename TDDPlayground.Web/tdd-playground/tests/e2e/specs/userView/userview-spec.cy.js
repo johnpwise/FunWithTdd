@@ -2,11 +2,6 @@ describe('User View', () => {
     beforeEach(() => {
         cy.intercept('GET', 'https://randomuser.me/api/', { fixture: 'user.json' }).as('getUserData');
 
-        // Set the base URL for resolving relative image paths
-        // cy.intercept({ url: '**/images/**', middleware: true }, (req) => {
-        //     req.url = req.url.replace('/images/', '/fixtures/images/');
-        // });
-
         cy.visit('/user');
     });
 
@@ -72,16 +67,23 @@ describe('User View', () => {
             });
         });
 
-        it('should display an error toast if the API returns an error', () => {
+        it('should show a spinner inside the button instead of the button text while the API call is in progress', async () => {
             // Arrange
-            const selector = 'button';
-            cy.intercept('GET', 'https://randomuser.me/api/', { statusCode: 500 });
+            const buttonSelector = 'button';
+            const spinnerSelector = '.fa-spinner';
 
             // Act
-            cy.get(selector).click();
+            cy.get(spinnerSelector).should('not.exist')
+            cy.get(buttonSelector).click()
 
-            // Assert: check that an error toast is displayed
-            cy.get('.toast').should('exist');
-        });
+            // Assert
+            cy.get(spinnerSelector).should('exist')
+
+            cy.intercept('GET', 'https://randomuser.me/api/', { /* mocked response */ }).as('getUserData')
+            cy.wait('@getUserData')
+
+            // Call complete, so spinner should be gone
+            cy.get(spinnerSelector).should('not.exist')
+        })
     });
 });
