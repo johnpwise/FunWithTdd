@@ -62,12 +62,13 @@ describe('User Component', () => {
 
     it('should display the users date of birth in the correct format (DD/MM/YYYY)', async () => {
         // Arrange
-        const expected = '01/01/1970';
+        const expected = '28/12/1970';
         const axiosGetStub = setupAxiosStub();
 
         // Act
-        await wrapper.vm.loadUserDetails();
+        const loadUserDetailsPromise = wrapper.vm.loadUserDetails();
         await axiosGetStub.returnValues[0];
+        await loadUserDetailsPromise;
 
         // Assert
         expect(wrapper.find('tbody tr:nth-child(2) td:nth-child(2)').text()).to.equal(expected);
@@ -76,8 +77,8 @@ describe('User Component', () => {
     describe('Format Date of Birth Method', () => {
         it('should return a date in the correct format (DD/MM/YYYY) when passed data from the API', async () => {
             // Arrange
-            const expected = '01/01/1970';
-            const date = '1970-01-01T17:49:01.393Z';
+            const expected = '28/12/1970';
+            const date = '1970-12-28T17:49:01.393Z';
 
             // Act
             const result = await wrapper.vm.formatDateOfBirth(date);
@@ -90,7 +91,7 @@ describe('User Component', () => {
 
 function setupAxiosStub() {
     let axiosGetStub = sinon.stub(axios, 'get');
-    axiosGetStub.returns(Promise.resolve({data: getMockUser() }));
+    axiosGetStub.returns(Promise.resolve({ data: getMockUser() }));
     return axiosGetStub;
 }
 

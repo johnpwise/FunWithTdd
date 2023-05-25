@@ -37,7 +37,7 @@
                                                 <span>{{ formLabels.dob }}</span>
                                             </td>
                                             <td>
-                                                <span>{{ user.dob.date }}</span>
+                                                <span>{{ formatDateOfBirth(user.dob.date) }}</span>
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
@@ -83,20 +83,28 @@ export default defineComponent({
     },
     methods: {
         loadUserDetails() {
-            // use axios to call an aPI with GET
+            // use axios to call an API with GET
             axios.get('https://randomuser.me/api/')
                 .then((response) => {
                     this.user = response.data.results[0];
-                    this.user.dob.date = this.formatDateOfBirth(this.user.dob.date);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         formatDateOfBirth(dateOfBirth: string): string {
-            const date = new Date(dateOfBirth);
-            const formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
-            return formattedDate;
+            // if the dateOfBirth string is '' then return '00/00/0000'
+            if (dateOfBirth === '') {
+                return '';
+            }
+
+            const dateString = dateOfBirth.split('T');
+            const parts = dateString[0].split('-');
+            const year = parts[0];
+            const month = parts[1];
+            const day = parts[2];
+
+            return `${day}/${month}/${year}`;
         }
 
     },
