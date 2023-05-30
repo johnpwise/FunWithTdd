@@ -78,6 +78,7 @@ describe('User View', () => {
 
             // Assert
             cy.get(spinnerSelector).should('exist')
+            cy.get(buttonSelector).should('be.disabled')
 
             cy.wait('@getUserData')
 
