@@ -1,6 +1,6 @@
 describe('User View', () => {
     beforeEach(() => {
-        cy.intercept('GET', 'https://localhost:7298/api/userprofile', { fixture: 'user.json' }).as('getUserData');
+        cy.intercept('GET', 'https://localhost:7298/api/userprofile/getrandomuserprofile', { fixture: 'user.json' }).as('getUserData');
 
         cy.visit('/user');
     });

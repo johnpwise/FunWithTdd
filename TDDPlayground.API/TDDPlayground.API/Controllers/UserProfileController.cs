@@ -4,7 +4,7 @@ using TDDPlayground.API.Interfaces;
 namespace TDDPlayground.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class UserProfileController : ControllerBase
 {
     private readonly IUserProfileService _userProfileService;
@@ -14,6 +14,7 @@ public class UserProfileController : ControllerBase
         _userProfileService = userProfileService;
     }
 
+    [HttpGet]
     public async Task<IActionResult> GetRandomUserProfileAsync()
     {
         var result = await _userProfileService.GetRandomUserProfileAsync();

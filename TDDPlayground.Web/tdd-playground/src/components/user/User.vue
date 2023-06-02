@@ -134,7 +134,7 @@ export default defineComponent({
         loadUserDetails() {
             this.isDisabled = true;
 
-            axios.get('https://localhost:7298/api/userprofile')
+            axios.get('https://localhost:7298/api/userprofile/getrandomuserprofile')
                 .then((response) => {
                     this.user = response.data.results[0];
                 })

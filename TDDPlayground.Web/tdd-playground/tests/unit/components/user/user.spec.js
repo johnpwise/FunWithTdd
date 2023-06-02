@@ -61,7 +61,7 @@ describe('User Component', () => {
         await wrapper.vm.loadUserDetails();
 
         // Assert: Check that the stub was called with the correct URL
-        expect(axiosGetStub).to.have.been.calledWith('https://localhost:7298/api/userprofile');
+        expect(axiosGetStub).to.have.been.calledWith('https://localhost:7298/api/userprofile/getrandomuserprofile');
 
         // Clean up: restore the original function
         axiosGetStub.restore();
