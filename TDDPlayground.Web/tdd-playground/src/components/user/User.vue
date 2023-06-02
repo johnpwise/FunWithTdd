@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import axios from 'axios';
 
 export default defineComponent({
@@ -134,7 +134,7 @@ export default defineComponent({
         loadUserDetails() {
             this.isDisabled = true;
 
-            axios.get('https://randomuser.me/api/')
+            axios.get('https://localhost:7298/api/userprofile')
                 .then((response) => {
                     this.user = response.data.results[0];
                 })

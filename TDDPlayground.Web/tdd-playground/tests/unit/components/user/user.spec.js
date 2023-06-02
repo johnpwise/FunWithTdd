@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
 import { use } from 'chai';
+
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
@@ -13,10 +14,18 @@ use(sinonChai);
 
 describe('User Component', () => {
     let wrapper = null;
+    const pageTitle = 'User';
 
     beforeEach(() => {
         sinon.restore();
-        wrapper = shallowMount(User);
+        wrapper = shallowMount(User, {
+            global: {
+                stubs: {
+                    FontAwesomeIcon: true
+                }
+            },
+            propsData: { pageTitle }
+        });
     });
 
     it('should render', () => {
@@ -24,18 +33,13 @@ describe('User Component', () => {
     });
 
     it('should render props.pageTitle when passed', () => {
-        // Arrange
-        const pageTitle = 'User';
-        wrapper = shallowMount(User, {
-            propsData: { pageTitle }
-        });
-
         // Act & Assert
         expect(wrapper.text()).to.include(pageTitle);
     });
 
     it('should call the "loadUserDetails" method when the "Load User Details" button is clicked', () => {
         // Arrange
+        const axiosGetStub = setupAxiosStub();
         const button = wrapper.find('button');
         const spy = sinon.spy(wrapper.vm, 'loadUserDetails');
 
@@ -44,9 +48,12 @@ describe('User Component', () => {
 
         // Assert
         expect(spy.called).to.be.true;
+
+        // Clean up: restore the original function
+        axiosGetStub.restore();
     });
 
-    it('should call the Random User Generator API when the "loadUserDetails" method is called', async () => {
+    it('should call the custom API when the "loadUserDetails" method is called', async () => {
         // Arrange
         const axiosGetStub = setupAxiosStub();
 
@@ -54,7 +61,7 @@ describe('User Component', () => {
         await wrapper.vm.loadUserDetails();
 
         // Assert: Check that the stub was called with the correct URL
-        expect(axiosGetStub).to.have.been.calledWith('https://randomuser.me/api/');
+        expect(axiosGetStub).to.have.been.calledWith('https://localhost:7298/api/userprofile');
 
         // Clean up: restore the original function
         axiosGetStub.restore();
@@ -72,6 +79,9 @@ describe('User Component', () => {
 
         // Assert
         expect(wrapper.find('tbody tr:nth-child(2) td:nth-child(2)').text()).to.equal(expected);
+
+        // Clean up: restore the original function
+        axiosGetStub.restore();
     });
 
     describe('Format Date of Birth Method', () => {
