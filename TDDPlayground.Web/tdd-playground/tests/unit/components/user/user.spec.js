@@ -1,8 +1,10 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import { use } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import { use } from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import axios from 'axios'
 import User from '@/components/user/User.vue'
@@ -16,7 +18,16 @@ describe('User Component', () => {
 
     beforeEach(() => {
         sinon.restore();
-        wrapper = shallowMount(User);
+        wrapper = shallowMount(User, {
+            global: {
+                components: {
+                    'font-awesome-icon': FontAwesomeIcon
+                }
+            },
+            stubs: {
+                'font-awesome-icon': false
+            }
+        });
     });
 
     it('should render', () => {
@@ -27,6 +38,14 @@ describe('User Component', () => {
         // Arrange
         const pageTitle = 'User';
         wrapper = shallowMount(User, {
+            global: {
+                components: {
+                    'font-awesome-icon': FontAwesomeIcon
+                }
+            },
+            stubs: {
+                'font-awesome-icon': false
+            },
             propsData: { pageTitle }
         });
 
