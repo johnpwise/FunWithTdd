@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
 import { use } from 'chai';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -20,9 +21,12 @@ describe('User Component', () => {
         sinon.restore();
         wrapper = shallowMount(User, {
             global: {
-                stubs: {
-                    FontAwesomeIcon: true
+                components: {
+                    'font-awesome-icon': FontAwesomeIcon
                 }
+            },
+            stubs: {
+                'font-awesome-icon': false
             },
             propsData: { pageTitle }
         });
