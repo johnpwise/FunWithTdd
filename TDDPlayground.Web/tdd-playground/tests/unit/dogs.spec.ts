@@ -43,7 +43,7 @@ describe('DogsView.vue', () => {
             expect(axiosGetStub).to.have.been.calledWith(expectedUrl);
         });
 
-        context("when the API call is successful", () => {
+        context("when the API call returns a 200 response", () => {
             it("should set the 'dogImage' data property with the image URL returned from the API", async () => {
                 // Arrange
                 const expectedUrl = 'https://images.dog.ceo/breeds/mastiff-english/2.jpg';
