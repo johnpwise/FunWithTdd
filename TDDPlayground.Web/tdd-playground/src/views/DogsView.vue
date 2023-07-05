@@ -21,19 +21,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
     name: 'DogsView',
-    methods: {
-        getDoggieData() {
-            // fetch('https://dog.ceo/api/breeds/image/random')
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //         // this.dogImage = data.message;
-            //         console.log(data);
-            //     });
-        },
+    data() {
+        return {
+            dogImage: '',
+        };
     },
-});
-
+    methods: {
+        getDoggieData() : void {
+            axios.get('https://dog.ceo/api/breeds/image/random')
+                .then((response) => {
+                    this.dogImage = response.data.message;
+                })
+            }
+        }
+    });
 </script>
