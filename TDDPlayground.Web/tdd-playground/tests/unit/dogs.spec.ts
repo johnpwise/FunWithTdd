@@ -1,6 +1,5 @@
 import { VueWrapper, shallowMount } from '@vue/test-utils';
-import { expect } from 'chai';
-import { use } from 'chai';
+import { expect, use } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
